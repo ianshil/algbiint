@@ -1,0 +1,7 @@
+-R theories/general General
+-R theories/Syntax Synt
+-R theories/Kripke Krip
+-R theories/GHC GenHil
+-R theories/Algebra Alg
+theories
+
