@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
+</head>
+
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
+
+    <span class="button" id="toggle-proofs"></span>
+
+    <span class="right">
+      <a href="https://github.com/ianshil/FOBiInt">Project Page</a>
+      <a href="./indexpage.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
+</div>
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
+<h1 class="libtitle">GenHil.BiInt_extens_interactions</h1>
+
+<div class="code">
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/doc/V8.20.0/stdlib//Coq.Lists.List.html#"><span class="id" title="library">List</span></a>.<br/>
+<span class="id" title="keyword">Export</span> <a class="idref" href="http://coq.inria.fr/doc/V8.20.0/stdlib//Coq.Lists.List.html#ListNotations"><span class="id" title="module">ListNotations</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/doc/V8.20.0/stdlib//Coq.Arith.PeanoNat.html#"><span class="id" title="library">PeanoNat</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/doc/V8.20.0/stdlib//Coq.Sets.Ensembles.html#"><span class="id" title="library">Ensembles</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Synt.Syntax.html#"><span class="id" title="library">Syntax</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="GenHil.BiInt_GHC.html#"><span class="id" title="library">BiInt_GHC</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="GenHil.BiInt_logics.html#"><span class="id" title="library">BiInt_logics</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a id="extens_diff_sBIH" class="idref" href="#extens_diff_sBIH"><span class="id" title="lemma">extens_diff_sBIH</span></a> : <span class="id" title="keyword">forall</span> (<a id="p:1" class="idref" href="#p:1"><span class="id" title="binder">p</span></a> : <a class="idref" href="http://coq.inria.fr/doc/V8.20.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="GenHil.BiInt_GHC.html#sBIH_prv"><span class="id" title="inductive">sBIH_prv</span></a> (<a class="idref" href="http://coq.inria.fr/doc/V8.20.0/stdlib//Coq.Sets.Ensembles.html#Singleton"><span class="id" title="inductive">Singleton</span></a> <span class="id" title="var">_</span> (<a class="idref" href="Synt.Syntax.html#b16a18df85e2a55ee1945c8cea45c5df"><span class="id" title="notation">#</span></a> <a class="idref" href="GenHil.BiInt_extens_interactions.html#p:1"><span class="id" title="variable">p</span></a>)) (<a class="idref" href="Synt.Syntax.html#925ec7406b744d165f605bedb8adc094"><span class="id" title="notation">¬</span></a> <a class="idref" href="Synt.Syntax.html#925ec7406b744d165f605bedb8adc094"><span class="id" title="notation">(</span></a><a class="idref" href="Synt.Syntax.html#9e1e97ea9d39d2dd15ef71aaa5576f8b"><span class="id" title="notation">∞</span></a> <a class="idref" href="Synt.Syntax.html#9e1e97ea9d39d2dd15ef71aaa5576f8b"><span class="id" title="notation">(</span></a><a class="idref" href="Synt.Syntax.html#b16a18df85e2a55ee1945c8cea45c5df"><span class="id" title="notation">#</span></a> <a class="idref" href="GenHil.BiInt_extens_interactions.html#p:1"><span class="id" title="variable">p</span></a><a class="idref" href="Synt.Syntax.html#9e1e97ea9d39d2dd15ef71aaa5576f8b"><span class="id" title="notation">)</span></a><a class="idref" href="Synt.Syntax.html#925ec7406b744d165f605bedb8adc094"><span class="id" title="notation">)</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="tactic">intro</span> <span class="id" title="var">p</span>. <span class="id" title="tactic">eapply</span> <a class="idref" href="GenHil.BiInt_GHC.html#sDN"><span class="id" title="constructor">sDN</span></a>. <span class="id" title="tactic">apply</span> <a class="idref" href="GenHil.BiInt_GHC.html#sId"><span class="id" title="constructor">sId</span></a> ; <span class="id" title="tactic">split</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a id="sBIH_extens_wBIH" class="idref" href="#sBIH_extens_wBIH"><span class="id" title="lemma">sBIH_extens_wBIH</span></a> : <span class="id" title="keyword">forall</span> <a id="da7a5918a812e0216f4a54d21f7406c4" class="idref" href="#da7a5918a812e0216f4a54d21f7406c4"><span class="id" title="binder">Γ</span></a> <a id="A:3" class="idref" href="#A:3"><span class="id" title="binder">A</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="GenHil.BiInt_GHC.html#wBIH_prv"><span class="id" title="inductive">wBIH_prv</span></a> <a class="idref" href="GenHil.BiInt_extens_interactions.html#da7a5918a812e0216f4a54d21f7406c4"><span class="id" title="variable">Γ</span></a> <a class="idref" href="GenHil.BiInt_extens_interactions.html#A:3"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/doc/V8.20.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="GenHil.BiInt_GHC.html#sBIH_prv"><span class="id" title="inductive">sBIH_prv</span></a> <a class="idref" href="GenHil.BiInt_extens_interactions.html#da7a5918a812e0216f4a54d21f7406c4"><span class="id" title="variable">Γ</span></a> <a class="idref" href="GenHil.BiInt_extens_interactions.html#A:3"><span class="id" title="variable">A</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="tactic">intros</span> <span class="id" title="var">Γ</span> <span class="id" title="var">A</span> <span class="id" title="var">D</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">D</span>.<br/>
+<span class="comment">(*&nbsp;Id&nbsp;*)</span><br/>
+- <span class="id" title="tactic">apply</span> <a class="idref" href="GenHil.BiInt_GHC.html#sId"><span class="id" title="constructor">sId</span></a> ; <span class="id" title="tactic">auto</span>.<br/>
+<span class="comment">(*&nbsp;Ax&nbsp;*)</span><br/>
+- <span class="id" title="tactic">apply</span> <a class="idref" href="GenHil.BiInt_GHC.html#sAx"><span class="id" title="constructor">sAx</span></a> ; <span class="id" title="tactic">auto</span>.<br/>
+<span class="comment">(*&nbsp;MP&nbsp;*)</span><br/>
+- <span class="id" title="tactic">eapply</span> <a class="idref" href="GenHil.BiInt_GHC.html#sMP"><span class="id" title="constructor">sMP</span></a>. <span class="id" title="tactic">exact</span> <span class="id" title="var">IHD1</span>. <span class="id" title="tactic">auto</span>.<br/>
+<span class="comment">(*&nbsp;DN&nbsp;*)</span><br/>
+- <span class="id" title="tactic">apply</span> <a class="idref" href="GenHil.BiInt_GHC.html#sDN"><span class="id" title="constructor">sDN</span></a>. <span class="id" title="tactic">apply</span> (<a class="idref" href="GenHil.BiInt_logics.html#sBIH_monot"><span class="id" title="lemma">sBIH_monot</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">IHD</span>). <span class="id" title="tactic">intros</span> <span class="id" title="var">B</span> <span class="id" title="var">HB</span> ; <span class="id" title="tactic">inversion</span> <span class="id" title="var">HB</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a id="pair_sBIH_extens_wBIH" class="idref" href="#pair_sBIH_extens_wBIH"><span class="id" title="lemma">pair_sBIH_extens_wBIH</span></a> : <span class="id" title="keyword">forall</span> <a id="9cfd66c80bf9988ea8f7104e167ac5cd" class="idref" href="#9cfd66c80bf9988ea8f7104e167ac5cd"><span class="id" title="binder">Γ</span></a> <a id="d1f0e078f04502659f58b18dce315e18" class="idref" href="#d1f0e078f04502659f58b18dce315e18"><span class="id" title="binder">Δ</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="GenHil.BiInt_GHC.html#wpair_der"><span class="id" title="definition">wpair_der</span></a> <a class="idref" href="GenHil.BiInt_extens_interactions.html#9cfd66c80bf9988ea8f7104e167ac5cd"><span class="id" title="variable">Γ</span></a> <a class="idref" href="GenHil.BiInt_extens_interactions.html#d1f0e078f04502659f58b18dce315e18"><span class="id" title="variable">Δ</span></a> <a class="idref" href="http://coq.inria.fr/doc/V8.20.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="GenHil.BiInt_GHC.html#spair_der"><span class="id" title="definition">spair_der</span></a> <a class="idref" href="GenHil.BiInt_extens_interactions.html#9cfd66c80bf9988ea8f7104e167ac5cd"><span class="id" title="variable">Γ</span></a> <a class="idref" href="GenHil.BiInt_extens_interactions.html#d1f0e078f04502659f58b18dce315e18"><span class="id" title="variable">Δ</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="tactic">intros</span> <span class="id" title="var">Γ</span> <span class="id" title="var">Δ</span> <span class="id" title="var">wpair</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">wpair</span> <span class="id" title="keyword">as</span> (<span class="id" title="var">l</span> &amp; <span class="id" title="var">Hl0</span> &amp; <span class="id" title="var">Hl1</span> &amp; <span class="id" title="var">Hl2</span>).<br/>
+<span class="id" title="tactic">exists</span> <span class="id" title="var">l</span> ; <span class="id" title="tactic">repeat</span> <span class="id" title="tactic">split</span> ; <span class="id" title="tactic">auto</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="GenHil.BiInt_extens_interactions.html#sBIH_extens_wBIH"><span class="id" title="lemma">sBIH_extens_wBIH</span></a> ; <span class="id" title="tactic">auto</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a id="sBIH_wBIH_same_thms" class="idref" href="#sBIH_wBIH_same_thms"><span class="id" title="lemma">sBIH_wBIH_same_thms</span></a> : <span class="id" title="keyword">forall</span> <a id="A:6" class="idref" href="#A:6"><span class="id" title="binder">A</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="GenHil.BiInt_GHC.html#sBIH_prv"><span class="id" title="inductive">sBIH_prv</span></a> (<a class="idref" href="http://coq.inria.fr/doc/V8.20.0/stdlib//Coq.Sets.Ensembles.html#Empty_set"><span class="id" title="inductive">Empty_set</span></a> <span class="id" title="var">_</span>) <a class="idref" href="GenHil.BiInt_extens_interactions.html#A:6"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/doc/V8.20.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x"><span class="id" title="notation">&lt;-&gt;</span></a> <a class="idref" href="GenHil.BiInt_GHC.html#wBIH_prv"><span class="id" title="inductive">wBIH_prv</span></a> (<a class="idref" href="http://coq.inria.fr/doc/V8.20.0/stdlib//Coq.Sets.Ensembles.html#Empty_set"><span class="id" title="inductive">Empty_set</span></a> <span class="id" title="var">_</span>) <a class="idref" href="GenHil.BiInt_extens_interactions.html#A:6"><span class="id" title="variable">A</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="tactic">intros</span> <span class="id" title="var">A</span>. <span class="id" title="tactic">split</span>.<br/>
+- <span class="id" title="tactic">intro</span> <span class="id" title="var">D</span> ; <span class="id" title="var">remember</span> (<a class="idref" href="http://coq.inria.fr/doc/V8.20.0/stdlib//Coq.Sets.Ensembles.html#Empty_set"><span class="id" title="inductive">Empty_set</span></a> <a class="idref" href="Synt.Syntax.html#form"><span class="id" title="inductive">form</span></a>) <span class="id" title="keyword">as</span> <span class="id" title="var">X</span> ; <span class="id" title="var">revert</span> <span class="id" title="var">HeqX</span> ; <span class="id" title="tactic">induction</span> <span class="id" title="var">D</span> ; <span class="id" title="tactic">intro</span> ; <span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;Id&nbsp;*)</span><br/>
+&nbsp;&nbsp;+ <span class="id" title="tactic">inversion</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;Ax&nbsp;*)</span><br/>
+&nbsp;&nbsp;+ <span class="id" title="tactic">apply</span> <a class="idref" href="GenHil.BiInt_GHC.html#wAx"><span class="id" title="constructor">wAx</span></a> ; <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;MP&nbsp;*)</span><br/>
+&nbsp;&nbsp;+ <span class="id" title="tactic">eapply</span> <a class="idref" href="GenHil.BiInt_GHC.html#wMP"><span class="id" title="constructor">wMP</span></a>. <span class="id" title="tactic">apply</span> <span class="id" title="var">IHD1</span> ; <span class="id" title="tactic">auto</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">IHD2</span> ; <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;sDN&nbsp;*)</span><br/>
+&nbsp;&nbsp;+ <span class="id" title="tactic">apply</span> <a class="idref" href="GenHil.BiInt_GHC.html#wDN"><span class="id" title="constructor">wDN</span></a> ; <span class="id" title="tactic">auto</span>.<br/>
+- <span class="id" title="tactic">intro</span> <span class="id" title="var">D</span> ; <span class="id" title="var">remember</span> (<a class="idref" href="http://coq.inria.fr/doc/V8.20.0/stdlib//Coq.Sets.Ensembles.html#Empty_set"><span class="id" title="inductive">Empty_set</span></a> <a class="idref" href="Synt.Syntax.html#form"><span class="id" title="inductive">form</span></a>) <span class="id" title="keyword">as</span> <span class="id" title="var">X</span> ; <span class="id" title="var">revert</span> <span class="id" title="var">HeqX</span> ; <span class="id" title="tactic">induction</span> <span class="id" title="var">D</span> ; <span class="id" title="tactic">intro</span> ; <span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;Id&nbsp;*)</span><br/>
+&nbsp;&nbsp;+ <span class="id" title="tactic">inversion</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;Ax&nbsp;*)</span><br/>
+&nbsp;&nbsp;+ <span class="id" title="tactic">apply</span> <a class="idref" href="GenHil.BiInt_GHC.html#sAx"><span class="id" title="constructor">sAx</span></a> ; <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;MP&nbsp;*)</span><br/>
+&nbsp;&nbsp;+ <span class="id" title="tactic">eapply</span> <a class="idref" href="GenHil.BiInt_GHC.html#sMP"><span class="id" title="constructor">sMP</span></a>. <span class="id" title="tactic">apply</span> <span class="id" title="var">IHD1</span> ; <span class="id" title="tactic">auto</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">IHD2</span> ; <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;wDN&nbsp;*)</span><br/>
+&nbsp;&nbsp;+ <span class="id" title="tactic">apply</span> <a class="idref" href="GenHil.BiInt_GHC.html#sDN"><span class="id" title="constructor">sDN</span></a> ; <span class="id" title="tactic">auto</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+</div>
+<div id="footer">
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
+</div>
+</div>
+</body>
+
+</html>
