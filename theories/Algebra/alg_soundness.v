@@ -29,7 +29,7 @@ inversion Ax ; subst ; cbn.
 - apply alg_BA4.
 Qed.
 
-(* We can then show that wBIH is sound with respect to the order
+(* We can then show that wBIH is sound with respect to the partial order
    semantic consequence. *)
 
    Theorem algord_soundness_wBIH Γ ϕ : wBIH_prv Γ ϕ -> alg_ordconseq Γ ϕ.

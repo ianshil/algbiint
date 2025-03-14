@@ -47,7 +47,7 @@ Definition alg_tdconseq Γ ϕ :=
     exists Γ', (forall γ, Γ' γ -> Γ γ) /\ (exists l, forall γ, List.In γ l <-> Γ' γ) /\
     forall A amap a, (forall γ, Γ' γ -> aleq A a (interp A amap γ)) -> aleq A a (interp A amap ϕ).
 
-(* The usual order consequence relation is as follows.*)
+(* The usual order consequence relation is as follows. *)
 
 Definition alg_ordconseq Γ ϕ :=
     forall A amap a, (forall γ, Γ γ -> aleq A a (interp A amap γ)) -> aleq A a (interp A amap ϕ).

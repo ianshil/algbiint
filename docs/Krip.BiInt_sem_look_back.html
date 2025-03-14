@@ -211,26 +211,6 @@
 <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
-<span class="comment">(*&nbsp;destruct&nbsp;(eq_dec_propvar&nbsp;r&nbsp;p).<br/>
-&nbsp;&nbsp;+&nbsp;subst.&nbsp;destruct&nbsp;v&nbsp;;&nbsp;auto.&nbsp;simpl.&nbsp;destruct&nbsp;u0.&nbsp;split&nbsp;;&nbsp;auto.&nbsp;apply&nbsp;diff_prop.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apply&nbsp;Logic.I.&nbsp;simpl.&nbsp;apply&nbsp;Logic.I.<br/>
-&nbsp;&nbsp;+&nbsp;destruct&nbsp;(eq_dec_propvar&nbsp;r&nbsp;q).<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;subst.&nbsp;destruct&nbsp;v&nbsp;;&nbsp;auto.&nbsp;simpl.&nbsp;destruct&nbsp;u0.&nbsp;simpl&nbsp;in&nbsp;H0.&nbsp;destruct&nbsp;u.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inversion&nbsp;H0.&nbsp;exfalso&nbsp;;&nbsp;apply&nbsp;H1&nbsp;;&nbsp;auto.&nbsp;2:&nbsp;auto.&nbsp;simpl&nbsp;in&nbsp;H.&nbsp;inversion&nbsp;H.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;simpl.&nbsp;auto.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;<br/>
-<br/>
-<br/>
-<br/>
-&nbsp;&nbsp;+&nbsp;destruct&nbsp;u.&nbsp;destruct&nbsp;p.&nbsp;simpl&nbsp;in&nbsp;H0.&nbsp;destruct&nbsp;v&nbsp;;&nbsp;auto.&nbsp;simpl.&nbsp;destruct&nbsp;u&nbsp;;&nbsp;auto.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;p.&nbsp;simpl&nbsp;in&nbsp;H0.&nbsp;destruct&nbsp;v&nbsp;;&nbsp;auto.&nbsp;simpl.&nbsp;destruct&nbsp;u&nbsp;;&nbsp;auto.<br/>
-&nbsp;&nbsp;+&nbsp;destruct&nbsp;v&nbsp;;&nbsp;simpl&nbsp;;&nbsp;auto.&nbsp;destruct&nbsp;u0&nbsp;;&nbsp;auto.&nbsp;simpl&nbsp;in&nbsp;H0.&nbsp;destruct&nbsp;u&nbsp;;&nbsp;auto.<br/>
--&nbsp;destruct&nbsp;PQ1.<br/>
-&nbsp;&nbsp;+&nbsp;destruct&nbsp;p.&nbsp;simpl&nbsp;in&nbsp;H0.&nbsp;destruct&nbsp;v&nbsp;;&nbsp;simpl&nbsp;;&nbsp;auto.&nbsp;destruct&nbsp;u&nbsp;;&nbsp;simpl&nbsp;;&nbsp;auto.<br/>
-&nbsp;&nbsp;+&nbsp;simpl&nbsp;in&nbsp;H0.&nbsp;destruct&nbsp;v&nbsp;;&nbsp;simpl&nbsp;;&nbsp;auto.&nbsp;destruct&nbsp;u&nbsp;;&nbsp;simpl&nbsp;;&nbsp;auto.<br/>
-Qed.&nbsp;*)</span><br/>
-
-<br/>
 <span class="id" title="keyword">Instance</span> <a id="M1" class="idref" href="#M1"><span class="id" title="instance">M1</span></a> : <a class="idref" href="Krip.BiInt_Kripke_sem.html#model"><span class="id" title="class">model</span></a> :=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{|<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Krip.BiInt_Kripke_sem.html#nodes"><span class="id" title="method">nodes</span></a> := <a class="idref" href="Krip.BiInt_sem_look_back.html#UnDeuxTrois"><span class="id" title="inductive">UnDeuxTrois</span></a> ;<br/>

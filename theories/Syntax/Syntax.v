@@ -21,7 +21,7 @@ Inductive form : Type :=
  | Imp : form -> form -> form
  | Excl : form -> form -> form.
 
-(* We use the following notations for modal formulas. *)
+(* We use the following notations for bi-intuitionistic formulas. *)
 
 Notation "# p" := (Var p) (at level 1) : My_scope.
 Notation "A --> B" := (Imp A B) (at level 43, right associativity) : My_scope.

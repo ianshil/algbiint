@@ -29,10 +29,7 @@ Inductive Axioms (F : form) : Prop :=
  | BA3 A B C : F = ((A --< B) --< C) --> (A --< (B ∨ C)) -> Axioms F
  | BA4 A B : F = (¬ (A --< B)) --> (A --> B) -> Axioms F.
 
-(* Finally, we can define the rules which constitute our calculi. We gather
-   them in cacluli in a definition appearing later.
-
-   We start by giving the rules common to both calculi. *)
+(* Then, we can define the calculi. *)
 
 Inductive wBIH_prv : (form -> Prop) -> form -> Prop :=
   | wId Γ A : In _ Γ A -> wBIH_prv Γ A
@@ -46,7 +43,7 @@ Inductive sBIH_prv : (form -> Prop) -> form -> Prop :=
   | sMP Γ A B : sBIH_prv Γ (A --> B) ->  sBIH_prv Γ A -> sBIH_prv Γ B
   | sDN Γ A : sBIH_prv Γ A ->  sBIH_prv Γ (¬ ∞ A).
 
-(* Define the general notion of derivable pair. *)
+(* Finally , we define the general notion of derivable pair. *)
 
 Definition wpair_der Γ Δ : Prop :=
     exists (l : list form), NoDup l /\ (forall A, List.In A l -> Δ A) /\

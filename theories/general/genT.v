@@ -12,29 +12,11 @@ Require Import gen.
 
 Polymorphic Definition rlsT W := list W -> W -> Type.
 
-(* how to express the empty set *)
-(* Inductive emptyT {X : Type} : X -> Type := .
-
-Lemma emptyT_any': forall (sty : Type) Q (prem : sty), emptyT prem -> Q prem.
-Proof. intros. induction H. Qed.
-
-Lemma emptyT_any: forall (sty : Type) Q (prem : sty), emptyT prem -> Q.
-Proof. intros. induction H. Qed. 
-
-(* compare 
-  https://coq.inria.fr/stdlib/Coq.Relations.Relation_Definitions.html *) *)
 Polymorphic Definition relationT (A : Type) := A -> A -> Type.
-(* Inductive empty_relT {A B : Type} : A -> B -> Type := .
-
-Lemma rsub_emptyT {A B} r : @rsub A B empty_relT r.
-Proof. intros u v e. destruct e. Qed. *)
 
 Definition transitiveT W (R : relationT W) :=
   forall (x y z : W), R x y -> R y z -> R x z.
 
-(*
-Definition iffT A B : Type := (A -> B) * (B -> A).
-*)
 Lemma iffT_trans: forall A B C, iffT A B -> iffT B C -> iffT A C.
 Proof.  unfold iffT. intros. destruct X.  destruct X0. tauto. Qed.
 
@@ -50,7 +32,6 @@ Proof.  unfold iffT. intros. tauto. Qed.
 Lemma iffT_D2': forall A B, iffT B A -> A -> B.
 Proof.  unfold iffT. intros. tauto. Qed.
 
-(* simpler proof objects *)
 Definition iffT_sym (A B : Type) (X : iffT A B) := let (f, g) := X in (g, f).
 Definition iffT_D1 (A B : Type) (X : iffT A B) a := let (f, _) := X in f a.
 Definition iffT_D2 (A B : Type) (X : iffT A B) b := let (_, g) := X in g b.
@@ -61,15 +42,6 @@ Proof. intros. destruct X1. tauto. Qed.
 Lemma iffT_prod A A' B B' : iffT A A' -> iffT B B' -> iffT (A * B) ( A' * B').
 Proof. unfold iffT. intros. destruct X. destruct X0. 
 split ; apply prod_mono ; assumption. Qed.
-
-(* or defined versions of these
-Definition prod_mono_d A A' B B' aa bb (ab : A * B) :=
-  let (a, b) := ab in (aa a : A', bb b : B').
-
-Definition iffT_prod_d A A' B B' (iaa : iffT A A') (ibb : iffT B B') :=
-  let (af, ab) := iaa in 
-    let (bf, bb) := ibb in (prod_mono af bf, prod_mono ab bb).
-*)
 
 Inductive AccT (A : Type) (R : A -> A -> Type) (x : A) : Type :=
     AccT_intro : (forall y : A, R y x -> AccT R y) -> AccT R x.
@@ -158,19 +130,6 @@ Lemma ForallT_impl:
 Proof.  intros.  induction X0. apply ForallT_nil.
   apply ForallT_cons. apply X. apply p. assumption. Qed.
 
-(*
-ForallT_Exists_neg:
-  forall (A : Type) (P : A -> Prop) (l : list A),
-  ForallT (fun x : A => ~ P x) l <-> ~ Exists P l
-ForallT_dec:
-  forall (A : Type) (P : A -> Prop),
-  (forall x : A, {P x} + {~ P x}) ->
-  forall l : list A, {ForallT P l} + {~ ForallT P l}
-ForallT_map_single:
-  forall (A B : Type) (P : B -> Prop) (f : A -> B) (x : A),
-  ForallT P (map f [x]) <-> P (f x)
-*)
-
 
 Inductive Forall2T (A B : Type) R : list A -> list B -> Type :=
     Forall2T_nil : Forall2T R [] []
@@ -209,11 +168,6 @@ intros. inversion_clear X. simpl. assumption.
 intros. inversion_clear X. simpl. apply Forall2T_cons. assumption.
 apply IHl1 ; assumption. Qed.
 
-(* this isn't usable, because destruct doesn't work for first clause 
-Inductive InT A (a : A) : list A -> Type :=
-  | InT_eq : forall l, @InT A a (a :: l)
-  | InT_cons : forall b l, @InT A a l -> @InT A a (b :: l).
- *)
   Ltac cET :=
   repeat match goal with
     | [ H : _ /\ _ |- _ ] => inversion_clear H
@@ -358,14 +312,7 @@ Proof. intros.  unfold anon. exists. assumption. apply I. Qed.
 
 Lemma InT_In': forall A a Y, ex (fun _ : InT (a : A) Y => True) -> In a Y.
 Proof.  intros. destruct H. apply InT_In. assumption. Qed. 
-(* why can't we do anon p -> p in general, we do it here?
-  note, trying apply InT_In. before destruct H. causes the error below *)
 
-(*
-Lemma anonD : forall p, anon p -> p.
-Proof. unfold anon. intros. destruct H.
-Error: Case analysis on sort Type is not allowed for inductive definition ex.
-*)
 Lemma anonD : forall p (q : Prop), (p -> q) -> (anon p -> q).
 Proof. unfold anon. intros. destruct H0. tauto. Qed.
 
@@ -418,11 +365,9 @@ apply Forall_cons. apply anonI. assumption. assumption. Qed.
 Lemma Forall_ForallT: forall A P (xs : list A),
   Forall P xs -> anon (ForallT P xs).
 Proof.  intros.  induction H. apply anonI. apply ForallT_nil.
-unfold anon in IHForall. cD.  apply anonI. (* can't do this before cD *)
+unfold anon in IHForall. cD.  apply anonI.
 apply ForallT_cons ; assumption. Qed.
 
-(* note proof carefully, intros then induction H fails,
-  inversion H too early fails *)
 Lemma Forall_ForallT': forall A P (xs : list A), Forall P xs -> ForallT P xs.
 Proof.  intros. induction xs. apply ForallT_nil.
 apply ForallT_cons. inversion H. subst. assumption.
@@ -462,20 +407,6 @@ Lemma prod_nat_split : forall (P : (nat * nat) -> Type),
     (forall n m : nat, P (n,m)).
 Proof. firstorder. Qed.
 
-
-(* Inductive empty : Type := .
-
-Lemma empty_explosion : forall (A : Type), empty -> A.
-Proof. intros A H. inversion H. Qed.
-
-Notation "T~ A" := (A -> empty) (at level 60).
-
-Lemma False_empty : False -> empty.
-Proof. intros H. inversion H. Qed.
-
-Lemma empty_False : empty -> False.
-Proof. intros H. inversion H. Qed. *)
-
 Inductive leT (n : nat) : nat -> Type :=
   | leT_n : leT n n | leT_S : forall m : nat, leT n m -> leT n (S m).
 
@@ -491,7 +422,6 @@ Proof. intros * ss. induction ss.
 + intros. subst.  specialize (IHss _ _ eq_refl eq_refl).
 inversion H0.  exact (leT_S IHss). Qed.
 
-(* forall n m, leT (S n) (S m) -> leT n m *)
 Definition leT_S_n n m l := @leT_S_n' _ _ l n m eq_refl eq_refl.
 
 Lemma leT_trans' l m n: leT m n -> leT l m -> leT l n.
