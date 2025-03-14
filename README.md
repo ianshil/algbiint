@@ -4,7 +4,7 @@ This project formalises the results in abstract algebraic logic for bi-intuition
 
 ## Building
 
-Compiling the project requires Coq version 8.19.2 and may not compile on other versions. One may enforce this locally by running `opam pin coq 8.20.0` in the project folder.
+Compiling the project requires Coq version 8.20.0 and may not compile on other versions. One may enforce this locally by running `opam pin coq 8.20.0` in the project folder.
 
 ## Instruction
 
