@@ -1,6 +1,7 @@
 Require Import List.
 Export ListNotations.
 Require Import PeanoNat.
+Require Import Arith.
 Require Import Lia.
 
 Require Import Ensembles.
@@ -12,6 +13,7 @@ Require Import wBIH_meta_interactions.
 Require Import sBIH_meta_interactions.
 Require Import BiInt_Kripke_sem.
 Require Import BiInt_bisimulation.
+Require Import BiInt_soundness.
 Require Import BiInt_Lindenbaum_lem.
 Require Import wBIH_completeness.
 
@@ -44,26 +46,60 @@ Fixpoint n_reachable (n: nat) (w v : @nodes M) : Prop :=
   | S m => (exists u, (((@reachable M) u v) \/ ((@reachable M) v u)) /\ (n_reachable m w u))
   end.
 
+Lemma n_reachable_tail : forall n m k l, (reachable m k \/ reachable k m) -> n_reachable n k l -> n_reachable (S n) m l.
+Proof.
+induction n ; cbn ; intros ; subst ; auto.
+- exists m ; auto.
+- destruct H0 as (u & H0 & H1).
+  eapply IHn in H1. 2: exact H. exists u ; split ; auto.
+Qed.
+
+Lemma n_reachable_head : forall n m l, n_reachable (S n) m l -> exists k, (reachable m k \/ reachable k m) /\ n_reachable n k l.
+Proof.
+induction n ; cbn ; intros ; subst ; auto.
+- destruct H as (u & H0 & H1) ; subst. exists l ; auto. 
+- destruct H as (u & H0 & (v & H1 & H2)).
+  assert (n_reachable (S n) m u).
+  { cbn. exists v ; split ; auto. }
+  eapply IHn in H. destruct H as (u' & H3 & H4) ; subst.
+  exists u' ; split ; auto. exists u ; auto.
+Qed.
+
+Lemma n_reachable_zz : forall n m k, n_reachable (S (S n)) m k ->
+  exists l j, n_reachable n m l /\ (reachable l j \/ reachable j l) /\ (reachable j k \/ reachable k j).
+Proof.
+induction n ; cbn ; intros ; subst ; auto.
+- destruct H as (u & H0 & (v & H2 & H3)) ; subst.
+  exists v,u ; auto.
+- destruct H as (u & H0 & (v & H2 & (r & H3 & H4))) ; subst.
+  edestruct IHn as (u' & v' & H0' & H2' & H3') ; subst.
+  cbn. exists v. split ; [exact H2 | ]. exists r ; split ; auto. exact H4.
+  exists v',u ; repeat split ; auto.
+  exists u' ; auto.
+Qed.
+
 Lemma n_reachable_DN_clos : forall n w A,
   (wforces M w (DN_form n A)) ->
     (forall v, (n_reachable n w v) -> (wforces M v A)).
 Proof.
 induction n.
-- intros. simpl in H. inversion H0. subst. auto.
-- intros. inversion H0. destruct H1. destruct H1.
+- cbn ; intros ; subst ; auto.
+- intros. destruct H0 as (u & H1 & H2). destruct H1.
   * pose (IHn w (¬ (∞ A))). pose (DN_form_DN n A). rewrite e in H.
-    pose (w0 H x H2). simpl in w1. pose (w1 v H1).
+    eapply w0 in H. 2: exact H2. simpl in H.
     destruct (LEM (wforces M v A)) ; auto. exfalso.
-    pose (w0 H). pose (w1 _ H1).
+    eapply H. exact H0.
     assert ((exists v0 : nodes, reachable v0 v /\ (wforces M v0 A -> False))).
-    exists x. repeat split ; auto. intros. apply H3.
-    apply Persistence with (w:=x) ; auto. destruct H4. destruct H4. apply f0 ; auto.
+    exists u. repeat split ; auto. intros. apply H1.
+    apply Persistence with (w:=u) ; auto. destruct H3 as (t & H3 & H4). 
+    intro H5. apply H4 ; apply H5 ; auto.
   * pose (IHn w (¬ (∞ A))). pose (DN_form_DN n A). rewrite e in H.
-    pose (w0 H x H2). simpl in w1. pose (w1 x).
+    eapply w0 in H. 2: exact H2.
     destruct (LEM (wforces M v A)) ; auto. exfalso.
-    assert (exists v : nodes, reachable v x /\ (wforces M v A -> False)).
-    exists v. repeat split ; auto. destruct H4. destruct H4.
-    apply f. apply (@reach_refl M). intro. apply H5 ; auto.
+    assert (exists v : nodes, reachable v u /\ (wforces M v A -> False)).
+    exists v. repeat split ; auto. destruct H3. destruct H3.
+    apply H with u. apply (@reach_refl M). intro.
+    apply H5 in H3. auto. auto.
 Qed.
 
 Definition s_is_n_reachable (w : @ nodes M) : Prop :=
@@ -182,4 +218,12 @@ Proof.
 intros Γ A GC. pose (sQuasiCompleteness Γ A).
 pose (LEM (sBIH_prv Γ A)). destruct o. auto. exfalso.
 apply n ; assumption.
+Qed.
+
+Theorem sSoundCompl : forall Γ A,
+    glob_conseq Γ A <-> sBIH_prv Γ A.
+Proof.
+intros Γ A. split.
+- apply sCompleteness.
+- apply LEM_sSoundness.
 Qed.

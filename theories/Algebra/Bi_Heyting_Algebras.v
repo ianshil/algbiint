@@ -212,6 +212,11 @@ pose (meet_elim2 a (rpc a b)). rewrite ord_resid in a0.
 rewrite mcomm in a0. rewrite meet_absorp0 in a0 ; auto.
 Qed.
 
+Lemma double_neg a : a << rpc (rpc a zero) zero.
+Proof.
+repeat rewrite ord_resid. rewrite mcomm. rewrite <- ord_resid. apply aleq_refl.
+Qed.
+
 (* Properties of subtr. *)
 
 Lemma bi_LEM a : one = join a (subtr one a).

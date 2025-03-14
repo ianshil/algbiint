@@ -42,6 +42,11 @@ Proof.
 intros. apply sBIH_extens_wBIH. apply EFQ.
 Qed.
 
+Lemma sprv_Top : forall Γ , sBIH_prv Γ ⊤.
+Proof.
+intros. apply sBIH_extens_wBIH. apply prv_Top.
+Qed.
+
 Lemma scomm_Or_obj : forall A B Γ, (sBIH_prv Γ (Or A B --> Or B A)).
 Proof.
 intros. apply sBIH_extens_wBIH. apply comm_Or_obj.
@@ -279,6 +284,13 @@ Lemma sDN_dist_imp : forall A B Γ,
     (sBIH_prv Γ ((¬ (∞ (A --> B))) --> ((¬ (∞ A)) --> (¬ (∞ B))))).
 Proof.
 intros A B Γ. apply sBIH_extens_wBIH. apply DN_dist_imp.
+Qed.
+
+Lemma sDN_form_dist_imp : forall n A B Γ,
+    sBIH_prv Γ ( (DN_form n (A --> B)) -->  ((DN_form n A) -->  (DN_form n B))).
+Proof.
+intros n A B Γ. eapply sBIH_monot. apply sBIH_extens_wBIH. apply DN_form_dist_imp.
+intros C HC ; inversion HC.
 Qed.
 
 Theorem sBIH_Deduction_Theorem : forall Γ A B,

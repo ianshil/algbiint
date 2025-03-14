@@ -10,6 +10,7 @@ Require Import BiInt_logics.
 Require Import wBIH_meta_interactions.
 Require Import BiInt_Kripke_sem.
 Require Import BiInt_Lindenbaum_lem.
+Require Import BiInt_soundness.
 
 Section LEM_completeness.
 
@@ -220,6 +221,14 @@ Proof.
 intros Γ A LC. pose (wQuasiCompleteness Γ A).
 destruct (LEM (wBIH_prv Γ A)) ; auto. exfalso.
 apply n ; assumption.
+Qed.
+
+Theorem wSoundCompl : forall Γ A,
+     wBIH_prv Γ A <-> loc_conseq Γ A.
+Proof.
+intros Γ A. split.
+- apply LEM_wSoundness.
+- apply wCompleteness.
 Qed.
 
 End LEM_completeness.

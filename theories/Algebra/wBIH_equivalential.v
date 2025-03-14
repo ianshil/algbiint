@@ -351,6 +351,13 @@ induction n.
          rewrite DN_form_S in H ; auto.
       -- lia.
 Qed.
+
+Lemma n_reachable_DN_clos_equiv : forall M n w A,
+  (wforces M w (DN_form n A)) <->
+    (forall m v, m <= 2*n -> (n_reachable M m w v) -> (wforces M v A)).
+Proof.
+intros. split ; [ apply n_reachable_DN_clos | apply DN_form_n_reachable].
+Qed.
   
 Variable n: nat.
 
