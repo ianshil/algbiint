@@ -46,6 +46,24 @@ Fixpoint n_reachable (n: nat) (w v : @nodes M) : Prop :=
   | S m => (exists u, (((@reachable M) u v) \/ ((@reachable M) v u)) /\ (n_reachable m w u))
   end.
 
+Fixpoint n_zz (n: nat) (w v : @nodes M) : Prop :=
+  match n with
+  | 0 => w = v
+  | S m => (exists u0 u1, (((@reachable M) u0 u1) /\ ((@reachable M) v u1)) /\ (n_zz m w u0))
+  end.
+
+Definition zz (w : @ nodes M) : Prop :=
+  exists n, @n_zz n s w.
+
+Lemma n_zz_reachable_subset : forall n w v, n_zz n w v -> n_reachable (2*n) w v.
+Proof.
+induction n.
+- cbn ; firstorder.
+- cbn. intros w v. intro H. destruct H as (u0 & u1 & (H0 & H1) & H2). exists u1. split ; auto.
+  rewrite Nat.add_0_r. apply IHn in H2. rewrite Nat.add_succ_r.
+  cbn. exists u0. split ; auto. assert ((2 * n) = n + n). lia. rewrite <- H ; auto.
+Qed.
+
 Lemma n_reachable_tail : forall n m k l, (reachable m k \/ reachable k m) -> n_reachable n k l -> n_reachable (S n) m l.
 Proof.
 induction n ; cbn ; intros ; subst ; auto.

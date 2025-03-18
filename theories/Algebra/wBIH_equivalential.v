@@ -303,6 +303,17 @@ induction n.
   exists s ; split ; auto.
 Qed.
 
+Lemma head_n_zz : forall n M w v u r,
+  reachable w v -> reachable u v -> n_zz M n u r ->
+  n_zz M (S n) w r.
+Proof.
+induction n.
+- intros. cbn in H1 ; subst. cbn. exists w,v ; split ; auto.
+- intros. destruct H1 as (s & t & (Hs0 & Hs1) & Hs2).
+  exists s,t. repeat split ; auto.
+  apply IHn with v u ; auto.
+Qed.
+
 Lemma DN_form_n_reachable : forall n M w A,
   (forall m v, m <= 2*n -> (n_reachable M m w v) -> (wforces M v A)) ->
   (wforces M w (DN_form n A)).
@@ -357,6 +368,22 @@ Lemma n_reachable_DN_clos_equiv : forall M n w A,
     (forall m v, m <= 2*n -> (n_reachable M m w v) -> (wforces M v A)).
 Proof.
 intros. split ; [ apply n_reachable_DN_clos | apply DN_form_n_reachable].
+Qed.
+
+Lemma n_zz_DN_clos_equiv : forall M n w A,
+  (wforces M w (DN_form n A)) <->
+    (forall v, (n_zz M n w v) -> (wforces M v A)).
+Proof.
+intros. split.
+- intros. apply n_zz_reachable_subset in H0.
+  pose (n_reachable_DN_clos _ _ _ _ H (2 * n) v).
+  apply w0 ; auto.
+- revert n M w A. induction n.
+  + cbn ; intros. apply H ; auto.
+  + intros. cbn. intros. apply H1. intros.
+    clear H3. clear H1.
+    apply IHn. intros. apply H.
+    apply head_n_zz with v v0 ; auto.
 Qed.
   
 Variable n: nat.
