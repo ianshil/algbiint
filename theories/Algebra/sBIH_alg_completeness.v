@@ -1178,7 +1178,6 @@ Variable Hypirrel : forall Φ Ψ, (@setform Γ Φ = @setform Γ Ψ) -> Φ = Ψ.
 Theorem alg_completeness_sBIH ϕ : alg_eqconseq sEq Γ ϕ -> sBIH_prv Γ ϕ.
 Proof.
 intro H.
-epose (LEM _) ; destruct o as [P | NP]; [ exact P | ]. exfalso.
 assert (K: sEq # 0 ⊤). split ; auto.
 pose (H _ _ K (LindAlg Γ Hypirrel) (LindAlgamap Γ)). cbn in e.
 rewrite LindAlgrepres in *.
